@@ -1,0 +1,121 @@
+
+mysqldump -p -u qa-vi-gr-com qa-vi-gr-com > backup.sql
+
+
+Datenbank
+# Einloggen
+mysql -p -u [user] 
+
+# Datenbank auswählen
+use [datenbankname]
+
+# Datenbank exportieren (Man kann auch einzelne Tabellen so exportieren)
+mysqldump -p -u [user] [datenbankname] > [export_file].sql
+mysqldump -p -u [user] [datenbankname] [tabellenname] > [export_file].sql
+
+# Datenbank importieren
+# dazu zuerst einloggen und die RICHTIGE Datenbank wählen
+# Am besten vom Verzeichnis aus einloggen, wo das import_file liegt
+source [import_file] 
+
+# Alle Tabellennamen anzeigen
+# In die DB wechseln
+show tables
+
+# Alle Tabellen auf einmal löschen
+# mit "show tables" alle anzeigen, via 1. Spalte "drop table", 2. Spalte die kopierte Liste von show tables einfügen, 3. Spalte ein ";" für den Zeilenabschluss. Alles kopieren und dann in der Konsole einfügen
+Filesystem
+# In welchem Verzeichnis bin ich
+pwd
+
+# mit welchem User bin ich aktiv
+whoami
+
+# Wechseln ins Home-Verzeichnis
+cd ~
+
+# nach Dateien suchen ( Case-Insensitiv )
+find . -type f -iname '*[dateiname]*'
+
+# nach dem Inhalt von Dateien suchen
+grep -r 'String'
+-i ohne Case sensitiv
+--exclude-dir={cache,css} Ordner aus der Suche ausnehmen
+
+# Suchen im Suchergebnis von Grep
+grep -r 'suche' | grep -r 'zwei'
+| leitet die Ausgabe um
+
+# Ausgaben in eine Datei schreiben, geht mit nahezu jedem Befehl (ls, grep, find, cat)
+ls -la > [dateiname]
+
+# Inhalt des Verzeichnisses ausgeben
+ls -la
+-l für eine Liste mit weiteren Infos (Berechtigungen etc)
+-a für versteckte Dateien
+
+# Inhalt einer Datei ausgeben
+cat [dateiname]
+
+# Inhalt einer Datei so ausgeben, dass man rauf/runter gehen kann
+less [dateiname]
+
+# letzte 50 Zeilen einer Datei ansehen
+tail -n 50 [dateiname]
+
+# letzte Zeilen einer Datei ansehen und den Stream offen halten - jeden neuen Eintrag direkt anzeigen
+tail -f [dateiname]
+
+# Speicherplatzverbrauch am ganzen Server ansehen
+df -h
+
+# Speicherplatzverbrauch des aktuellen Verzeichnisses inkl Unterverzeichnisse
+du -h
+
+# Speicherplatzverbrauch übersicht aller Unterverzeichnisse
+du -d 1 -h 
+
+Kopieren und Arbeiten via SSH mit mehreren Servern
+# Eine Datei von einem anderen Server via SSH auf den aktuellen kopieren 
+# im Beispiel ist der Source-Server von Hetzner, daher -p 222 für den Port
+# kopiert mit "." am Ende in das aktuelle Verzeichnis
+scp -p 222 larisu@www.larise.com:/public_html/datei_am_source_server.tar.gz .
+
+Server
+# Netzwerkkonfiguration ansehen (ip)
+ifconfig 
+
+# Auslastung
+top
+
+tar
+# Entpacken eines Archivs:
+tar xfv archiv.tar
+Legende: (x = extract, f = file, v = verbose)
+
+# Dateien/Ordner in ein Archiv packen:
+tar cfv archiv.tar inhalt1 inhalt2 inhalt3
+Legende: (c = create)
+
+# Komprimierte Archive erstellen:
+tar cfzv archiv.tar.gz inhalt1 inhalt2 inhalt3
+Legende: (z = komprimieren)
+
+#Inhalt eines Archivs auflisten:
+tar tfv archiv.tar
+
+gz
+Da ein tar-Archiv, wie oben erwähnt, ohne Zusatzoptionen nicht komprimiert ist, kann dies mit der Zusatzoption gzip geschehen. gzip steht für GNU zip und dem tar-Archiv wird die Dateiendung .gz angehängt.
+
+# Eine Datei komprimieren:
+gzip file
+#### ACHTUNG: ersetzt vorhandene Files mit gz-Archiven - eher nicht aussführen. ###### 
+
+# Datei dekomprimieren:
+gunzip file
+
+#Dateien in einem komprimierten Archiv zusammenfassen:
+tar cfvz archiv.tar.gz inhalt1 inhalt2
+
+# Archiv dekomprimieren und auspacken:
+tar xfvz archiv.tar.gz

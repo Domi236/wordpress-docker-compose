@@ -1,0 +1,52 @@
+# Docker doku
+
+You can find the docker files in M:/enviroment/docker
+
+- create docker account
+
+- Download Docker for windows
+
+- in Docker Settings in Daemon [] experimental features checkbox checked setzen
+
+- change database settings, wordpress, laravel settings, whatever if needed
+
+- If you want to use the filesystem to save data, you will be ask for your use password (if your password don't match)
+
+- try this: WORKGROUP\[benutzername] (if this also not match, follow the description below)
+
+- see all users on your machine: net user
+
+- add user: $ net user [benutzername] [passwort] /ADD
+
+- add user rules: $ net localgroup Administratoren [benutzername] /ADD
+
+- start docker: $ docker-compose up (-d for starting in the background)
+
+- To Tear Down: $ docker-compose down --volumes
+
+- kill all running containers: $ docker stop $(docker ps -a -q)
+
+
+# know how: you need to know, if you use linux container on your system and then you take the same repository for an another system, you get an error)
+# you always must have the same container engine
+
+
+
+## docker befehle ##
+
+#stoppt alle container
+$ docker stop $(docker ps -a -q)
+
+# stoppt einzelnen docker
+$ docker stop containerId
+
+# starts docker
+$ docker-compose up
+
+# starts docker im hintergrund
+$ docker-compose up -d
+
+# To Tear Down
+$ docker-compose down --volumes
+
+
